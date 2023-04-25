@@ -43,7 +43,8 @@ export default function Header() {
         {username && (
           <>
             <Link to="/create" className="create-link">Create New Post</Link>
-            <a onClick={Logout} className="logout-link">Logout ({username})</a>
+            <button onClick={Logout} className="logout-link btn"
+            style={{background:"inherit", textAlign :"top", padding:"0",color:"#04e29d"}}>Logout ({username})</button>
           </>
         )}
         {!username && (

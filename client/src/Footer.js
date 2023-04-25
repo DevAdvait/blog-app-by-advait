@@ -21,6 +21,7 @@ const Footer = () => {
           className="text-white"
           href="https://www.advaittumbre.xyz"
           target={"_blank"}
+          rel="noreferrer"
           style={{
             textDecoration: "none",
             fontWeight: "600",
