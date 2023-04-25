@@ -13,7 +13,7 @@ export default function Post({
     <div className="post">
       <div className="post-image" style={{maxWidth:"250px",margin: "0 auto"}}>
         <Link to={`/post/${_id}`}>
-          <img src={"http://localhost:4000/" + cover} alt="" className="img-fluid"/>
+          <img src={"http://localhost:4000/" + cover} alt={`${title}-image`} className="img-fluid"/>
         </Link>
       </div>
       <div className="post-content">
@@ -21,7 +21,7 @@ export default function Post({
           <h2 style={{color:"#F6833B"}}>{title}</h2>
         </Link>
         <p className="info">
-          <a href="" className="author" style={{color:"#04e29d"}}>
+          <a href="https://www.advaittumbre.xyz" className="author" style={{color:"#04e29d"}} target="_blank">
             {author.username}
           </a>
           <time style={{color:"#ffffff"}} >{formatISO9075(new Date(createdAt))}</time>

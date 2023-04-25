@@ -7,7 +7,7 @@ const Footer = () => {
       {/* other footer content */}
       <NewsletterSignUp />
       <div
-        class="text-center p-3"
+        className="text-center p-3"
         style={{
           backgroundColor: "inherit",
           display: "flex",
@@ -18,15 +18,16 @@ const Footer = () => {
       >
         © 2020 Copyright :
         <a
-          class="text-white"
-          href="advaittumbre.xyz"
+          className="text-white"
+          href="https://www.advaittumbre.xyz"
+          target={"_blank"}
           style={{
             textDecoration: "none",
             fontWeight: "600",
             background:
               " linear-gradient(to right, var(--blue) 10%, var(--orange) 60%)",
-            webkitBackgroundClip: "text",
-            webkitTextFillColor: "transparent",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
             backgroundClip: "text",
           }}
         >

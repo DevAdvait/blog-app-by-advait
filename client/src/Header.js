@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import Logo from "./Capture-removebg-preview.png";
@@ -13,7 +13,7 @@ export default function Header() {
         setUserInfo(userInfo);
       });
     });
-  }, []);
+  });
 
   function Logout() {
     fetch("http://localhost:4000/logout", {
@@ -31,7 +31,7 @@ export default function Header() {
         <div style={{ width: "180px", margin: "0", alignItems: "center" }}>
           <img
             src={Logo}
-            alt=""
+            alt="BADVAIT Logo"
             className="img-fluid"
     
           />
