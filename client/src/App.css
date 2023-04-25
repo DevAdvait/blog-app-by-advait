@@ -1,0 +1,414 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+:root {
+  --blue: #04e29d;
+  --orange: #f6833b;
+}
+
+* {
+  box-sizing: border-box;
+}
+a {
+  cursor: pointer;
+}
+body {
+  color: rgb(241, 241, 241);
+  background-color: #03001c;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+h1 {
+  font-family: "Abril Fatface", cursive;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  font-family: "Source Sans Pro", sans-serif;
+}
+input {
+  font-family: "Abril Fatface", cursive;
+}
+
+img {
+  max-width: 100%;
+}
+main {
+  padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  align-items: center;
+  color: var(--blue);
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* header a.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #444;
+  width: 12rem;
+  height: 3rem;
+} */
+
+header nav {
+  display: flex;
+  gap: 16px;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+}
+
+div.post {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+@media screen and (min-width: 700px) {
+  div.post {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+div.post div.post-content h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+div.post div.post-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+div.post p.info {
+  margin: 0.5rem 0;
+  color: #777;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  gap: 1rem;
+}
+
+div.post p.info a.author {
+  color: #444;
+}
+div.post p.summary {
+  margin: 10px 0;
+  line-height: 1.4rem;
+  background: linear-gradient(to right, var(--blue) 10%, var(--orange) 40%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+::placeholder {
+  color: white;
+}
+
+div.post-page div.image {
+  max-height: 300px;
+  display: flex;
+  overflow: hidden;
+}
+div.post-page div.image img {
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+}
+div.post-page a {
+  color: #333;
+  text-decoration: underline;
+}
+div.post-page h1 {
+  text-align: center;
+  margin: 10px 0 5px;
+  background: linear-gradient(to right, var(--blue) 10%, var(--orange) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+div.post-page time {
+  text-align: center;
+  display: block;
+  font-size: 1rem;
+  color: #aaa;
+  margin: 10px 0;
+}
+div.post-page div.author {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+div.content p {
+  line-height: 1.7rem;
+  margin: 30px 0;
+}
+div.content li {
+  margin-bottom: 10px;
+}
+div.edit-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
+div.post-page a.edit-btn {
+  background-color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #03001c;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+}
+a svg {
+  height: 20px;
+}
+div.post-page div.content {
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+}
+div.post-page div.content a {
+  text-decoration: none;
+  color: var(--blue);
+}
+footer {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: auto;
+}
+
+/* .news-letter-wrapper */
+.news-letter-wrapper {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 1fr 0.6fr;
+  background-color: inherit;
+  padding: 0 auto;
+  width: 100%;
+}
+
+.news-letter-text {
+  margin-right: 20px;
+}
+
+.news-letter-text h3 {
+  background: linear-gradient(to right, var(--blue) 10%, var(--orange) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.news-letter-text p {
+  background: linear-gradient(to right, #f5de98 10%, #dfa398 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.form.newsLetter-signUp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.name-input,
+.email-input {
+  border: none;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  max-height: 40px;
+  min-width: 100%;
+  color: white;
+  font-size: 1rem;
+  font-weight: 800;
+  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-size: cover;
+}
+.name-input::placeholder,
+.email-input::placeholder {
+  font-size: 1.3rem;
+  letter-spacing: 0.8rem;
+  font-weight: 700;
+}
+
+.name-input:focus,
+.email-input:focus {
+  outline: none;
+}
+.name-input:hover,
+.email-input:hover {
+  outline: solid var(--blue);
+  font-weight: 600;
+  letter-spacing: 0.3rem;
+  background-image: url("./water-2079907_1920.jpg");
+  background-size: cover;
+}
+.name-input:hover::placeholder,
+.email-input:hover::placeholder {
+  outline: none;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5rem;
+}
+.newsLetter-signUp-form button[type="submit"] {
+  border: none;
+  background-color: white;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0px 8px rgb(202, 202, 240);
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+  min-width: 120px;
+  min-height: 30px;
+  text-align: center;
+  background-image: url("./fluid-7579494.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  margin: 0 auto;
+}
+
+.newsLetter-signUp-form button[type="submit"]:hover {
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 0 0px 8px var(--blue);
+  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  scale: 1.2;
+  transition: 0.3s;
+}
+
+.login-link,
+.register-link,
+.create-link,
+.logout-link {
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-family: "Playfair Display", serif;
+  margin: 0 10px;
+}
+
+.login-link:active,
+.login-link:hover,
+.login-link:focus,
+.register-link:active,
+.register-link:hover,
+.register-link:focus,
+.create-link:active,
+.create-link:hover,
+.create-link:focus,
+.logout-link:active,
+.logout-link:hover,
+.logout-link:focus {
+  background: linear-gradient(to right, var(--blue) 10%, var(--orange) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  scale: 1.2;
+  transition: 0.5s;
+}
+
+.edit-post-form .edit-post-submit-btn {
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0px 8px rgb(202, 202, 240);
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  min-width: 150px;
+  min-height: 40px;
+  text-align: center;
+  opacity: 0.8;
+  margin: 0 auto;
+}
+
+.edit-post-form .edit-post-submit-btn:hover,
+.edit-post-form .edit-post-submit-btn:active,
+.edit-post-form .edit-post-submit-btn:focus {
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 0 0px 8px var(--blue);
+  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  scale: 1.2;
+  transition: 0.3s;
+}
+
+ .create-post-submit-btn {
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0px 8px rgb(202, 202, 240);
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  min-width: 150px;
+  min-height: 40px;
+  text-align: center;
+  opacity: 0.8;
+  margin: 0 auto;
+}
+
+.create-post-submit-btn:hover,
+.create-post-submit-btn:active,
+.create-post-submit-btn:focus {
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 0 0px 8px var(--blue);
+  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  scale: 1.2;
+  transition: 0.3s;
+}
