@@ -13,7 +13,7 @@ export default function Post({
     <div className="post">
       <div className="post-image" style={{maxWidth:"250px",margin: "0 auto"}}>
         <Link to={`/post/${_id}`}>
-          <img src={"http://localhost:4000/" + cover} alt={`${title}`} className="img-fluid"/>
+          <img src={"https://badvait-backend.onrender.com/" + cover} alt={`${title}`} className="img-fluid"/>
         </Link>
       </div>
       <div className="post-content">

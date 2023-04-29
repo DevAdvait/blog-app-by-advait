@@ -1,11 +1,11 @@
 import React from "react";
-import NewsletterSignUp from "./NewsletterSignUp";
+
 
 const Footer = () => {
   return (
     <footer>
       {/* other footer content */}
-      <NewsletterSignUp />
+
       <div
         className="text-center p-3"
         style={{

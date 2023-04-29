@@ -20,7 +20,7 @@ const NewsletterSignUp = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/newsletter", {
+      const response = await fetch("https://badvait-backend.onrender.com/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const NewsletterSignUp = () => {
   };
 
   return (
-    <div className="news-letter-wrapper">
+    <div className="news-letter-wrapper container">
       <div className="news-letter-text">
         <h3>CodeBytes - Your Weekly Dose of Tech and Programming News</h3>
         <p>
