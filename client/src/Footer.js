@@ -16,7 +16,7 @@ const Footer = () => {
           marginTop: "1rem",
         }}
       >
-        © 2020 Copyright :
+        © 2023 Copyright :
         <a
           className="text-white"
           href="https://www.advaittumbre.xyz"

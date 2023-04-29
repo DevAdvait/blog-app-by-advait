@@ -2,7 +2,11 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import Logo from "./Capture-removebg-preview.png";
+
+
 export default function Header() {
+
+
   const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
