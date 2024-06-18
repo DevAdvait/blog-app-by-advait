@@ -34,5 +34,6 @@ api/node_modules
 client/.env
 api/.env
 
+
 # Ignore uploads in api folder
 api/uploads/*
