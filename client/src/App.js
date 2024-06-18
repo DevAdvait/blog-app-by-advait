@@ -1,15 +1,16 @@
-import './App.css';
-import {Route, Routes} from "react-router-dom";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import {UserContextProvider} from "./UserContext";
+import { UserContextProvider } from "./UserContext";
 import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
 import EditPost from "./pages/EditPost";
+import axios from "axios";
 
-
+axios.defaults.baseURL = process.env.REACT_APP_BEP_LINK;
 
 function App() {
   return (

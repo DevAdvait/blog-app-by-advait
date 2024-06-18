@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const NewsletterSignUp = () => {
@@ -20,18 +21,16 @@ const NewsletterSignUp = () => {
     }
 
     try {
-      const response = await fetch("https://badvait-backend.onrender.com/newsletter", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email }),
+      const response = await axios.post("/newsletter", {
+        // Using Axios post method
+        name,
+        email,
       });
-      const data = await response.json();
-      console.log(data);
+
+      console.log(response.data);
 
       // check if the email is already subscribed
-      if (data.message === "already subscribed") {
+      if (response.data.message === "already subscribed") {
         alert("You have already subscribed to the newsletter");
       } else {
         alert("Successfully subscribed to the newsletter");

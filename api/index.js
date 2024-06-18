@@ -15,8 +15,22 @@ const Newsletter = require("./models/Newsletter");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
+const PORT = process.env.PORT;
 
-app.use(cors({ credentials: true, origin: "https://blog-app-by-advait-tumbre.netlify.app" }));
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 5, // max 5 requests per minute
+  message: "Too many requests from this IP, please try again later.",
+});
+
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FE_LINK,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -36,34 +50,46 @@ app.post("/newsletter", async (req, res) => {
     // check if the email already exists in the database
     const existingSubscriber = await Newsletter.findOne({ email });
     if (existingSubscriber) {
-      return res.json({ message: "already subscribed" });
+      return res.json({ message: "Already Subscribed" });
     }
 
     // insert the new subscriber into the database
     const newSubscriber = new Newsletter({ name, email });
     await newSubscriber.save();
-    res.json({ message: "subscribed successfully" });
+    res.json({ message: "Subscribed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", limiter, async (req, res) => {
   const { username, password } = req.body;
+  // Check for SQL injection characters in username
+  if (/;|'|`/.test(username)) {
+    return res.status(400).json({ error: "Invalid characters in username" });
+  }
+
   try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: "Username already exists" });
+    }
+
+    // Create a new user
     const userDoc = await User.create({
       username,
       password: bcrypt.hashSync(password, salt),
     });
-    res.json(userDoc);
+    res.status(201).json(userDoc); // Use 201 Created for successful user creation
   } catch (e) {
-    console.log(e);
-    res.status(400).json(e);
+    console.error(e);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/login", limiter, async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username });
   const passOk = bcrypt.compareSync(password, userDoc.password);
@@ -71,7 +97,7 @@ app.post("/login", async (req, res) => {
     // logged in
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token).json({
+      res.cookie("token", token, { httpOnly: true }).json({
         id: userDoc._id,
         username,
       });
@@ -83,8 +109,15 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
-  jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
+  if (!token) {
+    return res.status(401).json({ error: "Token is required" });
+  }
+
+  jwt.verify(token, secret, (err, info) => {
+    if (err) {
+      console.error(err);
+      return res.status(401).json({ error: "Unauthorized access" });
+    }
     res.json(info);
   });
 });
@@ -136,12 +169,7 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
         .status(400)
         .json("Changes cannot be made. You are not the Author!");
     }
-    // await postDoc.update({
-    //   title,
-    //   summary,
-    //   content,
-    //   cover: newPath ? newPath : postDoc.cover,
-    // });
+
     postDoc.title = title;
     postDoc.summary = summary;
     postDoc.content = content;
@@ -168,8 +196,6 @@ app.get("/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.listen(4000);
-//
-//advaitmernblog
-//ij4gmKo5NletwPRt
-//mongodb+srv://advaitmernblog:ij4gmKo5NletwPRt@bba-cluster.r55gne1.mongodb.net/?retryWrites=true&w=majority
+app.listen(PORT, () => {
+  console.log(`App running on Port: ${PORT}`);
+});

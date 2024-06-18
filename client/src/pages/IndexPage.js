@@ -1,21 +1,42 @@
 import { useEffect, useState } from "react";
 import Post from "../Post";
 import NewsletterSignUp from "../NewsletterSignUp";
+import axios from "axios";
 
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetch("https://badvait-backend.onrender.com/post").then((response) => {
-      response.json().then((posts) => {
-        setPosts(posts);
+    axios
+      .get("/post")
+      .then((response) => {
+        setPosts(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+        setLoading(false);
       });
-    });
   }, []);
+
   return (
-    <div style={{ minHeight: "85vh" }}>
-      {posts.length > 0 &&
-        posts.map((post) => <Post key={post._id} {...post} />)}
-      <NewsletterSignUp />
+    <div>
+      <div className="hp-posts-div" style={{ minHeight: "85vh" }}>
+        {loading ? ( // Conditionally render loading text or posts
+          <div className="pp-loading">
+            {"Loading...".split("").map((char, index) => (
+              <span key={index}>{char}</span>
+            ))}
+          </div>
+        ) : (
+          posts.length > 0 &&
+          posts.map((post) => <Post key={post._id} {...post} />)
+        )}
+      </div>{" "}
+      <div>
+        <NewsletterSignUp />
+      </div>
     </div>
   );
 }

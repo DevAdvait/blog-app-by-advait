@@ -568,3 +568,102 @@ footer {
   scale: 1.2;
   transition: 0.3s;
 }
+
+form .create-post-form::placeholder {
+  color: black;
+}
+
+/* Container styling */
+.pp-loading {
+  font-family: "Arial", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: #04e29d;
+  display: inline-block;
+  margin: auto auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Wave animation */
+.pp-loading span {
+  display: inline-block;
+  animation: wave 1.3s infinite;
+}
+
+.pp-loading span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.pp-loading span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.pp-loading span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.pp-loading span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.pp-loading span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.pp-loading span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.pp-loading span:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.pp-loading span:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.pp-loading span:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.pp-loading span:nth-child(10) {
+  animation-delay: 1s;
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: initial;
+  }
+  30% {
+    transform: translateY(-20px);
+  }
+}
+
+.hp-postSum-btn {
+  background-color: #f8a774;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+
+.hp-postSum-inLine-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #007bff;
+}
+
+
+
+.post-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

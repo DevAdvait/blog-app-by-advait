@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Editor from "../Editor";
+import axios from "axios";
 
 export default function EditPost() {
   const { id } = useParams();
@@ -11,14 +12,13 @@ export default function EditPost() {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch("https://badvait-backend.onrender.com/post/" + id).then((response) => {
-      response.json().then((postInfo) => {
-        setTitle(postInfo.title);
-        setContent(postInfo.content);
-        setSummary(postInfo.summary);
-      });
+    axios.get(`/post/${id}`).then((response) => {
+      const postInfo = response.data;
+      setTitle(postInfo.title);
+      setContent(postInfo.content);
+      setSummary(postInfo.summary);
     });
-  }, []);
+  }, [id]);
 
   async function updatePost(ev) {
     ev.preventDefault();
@@ -30,18 +30,20 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch("https://badvait-backend.onrender.com/post", {
-      method: "PUT",
-      body: data,
-      credentials: "include",
-    });
-    if (response.ok) {
-      setRedirect(true);
+    try {
+      const response = await axios.put("/post", data, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.error("Error updating post:", error);
     }
   }
 
   if (redirect) {
-    return <Navigate to={"/post/" + id} />;
+    return <Navigate to={`/post/${id}`} />;
   }
 
   return (

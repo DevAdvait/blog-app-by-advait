@@ -4,28 +4,40 @@ import { formatISO9075 } from "date-fns";
 import { UserContext } from "../UserContext";
 import { Link } from "react-router-dom";
 import NewsletterSignUp from "../NewsletterSignUp";
+import axios from "axios";
 
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
-  useEffect(() => {
-    fetch(`https://badvait-backend.onrender.com/post/${id}`).then((response) => {
-      response.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
-  }, []);
 
-  if (!postInfo) return "";
+  useEffect(() => {
+    axios.get(`/post/${id}`).then((response) => {
+      setPostInfo(response.data);
+    });
+  }, [id]);
+
+  if (!postInfo)
+    return (
+      <div className="pp-loading">
+        {"Loading...".split("").map((char, index) => (
+          <span key={index}>{char}</span>
+        ))}
+      </div>
+    );
+
+  const isAuthor =
+    userInfo && postInfo.author && userInfo.id === postInfo.author._id;
 
   return (
     <div>
       <div className="post-page">
         <h1 style={{ color: "#F6833B" }}>{postInfo.title}</h1>
         <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
-        <div className="author">by @{postInfo.author.username}</div>
-        {userInfo.id === postInfo.author._id && (
+        {postInfo.author && (
+          <div className="author">by @{postInfo.author.username}</div>
+        )}
+        {isAuthor && (
           <div className="edit-row">
             <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
               <svg
@@ -48,7 +60,7 @@ export default function PostPage() {
         )}
         <div className="image">
           <img
-            src={`https://badvait-backend.onrender.com/${postInfo.cover}`}
+            src={`http://localhost:5000/${postInfo.cover}`}
             alt={`${postInfo.title}`}
           />
         </div>

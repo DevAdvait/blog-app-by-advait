@@ -8,6 +8,6 @@ export default function Layout () {
             <Header/>
             <Outlet/>
             <Footer/>
-        </main>
+        </main> 
     )
 }
