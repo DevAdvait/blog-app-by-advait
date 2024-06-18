@@ -23,8 +23,16 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
+
+# Ignore node_modules in all locations
 node_modules
-api/uploads/*
+client/node_modules
+api/node_modules
 
-
+# Ignore .env files in all locations
 .env
+client/.env
+api/.env
+
+# Ignore uploads in api folder
+api/uploads/*
