@@ -18,8 +18,8 @@ const secret = process.env.JWT_SECRET;
 const PORT = process.env.PORT;
 
 const allowedOrigins = [
-  "https://babat.netlify.app",
-  "https://main--babat.netlify.app",
+  process.env.FE_LINK_1,
+  FE_LINK_2,
 ];
 
 const rateLimit = require("express-rate-limit");
