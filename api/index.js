@@ -17,6 +17,11 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
 const PORT = process.env.PORT;
 
+const allowedOrigins = [
+  "https://babat.netlify.app",
+  "https://main--babat.netlify.app",
+];
+
 const rateLimit = require("express-rate-limit");
 
 const limiter = rateLimit({
@@ -28,7 +33,15 @@ const limiter = rateLimit({
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FE_LINK,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
   })
 );
 app.use(express.json());
