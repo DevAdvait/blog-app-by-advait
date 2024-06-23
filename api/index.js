@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   process.env.FE_LINK_1,
-  procces.env.FE_LINK_2,
+  process.env.FE_LINK_2,
 ];
 
 const rateLimit = require("express-rate-limit");
