@@ -6,11 +6,9 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import "./loginPage.css";
 
-
-
 function LoginPage() {
   const { setUserInfo } = useContext(UserContext);
-    const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   // Formik useFormik hook for form management
   const formik = useFormik({
@@ -45,7 +43,6 @@ function LoginPage() {
     },
   });
 
-
   if (redirect) {
     return <Navigate to={"/"} />;
   }
@@ -71,6 +68,8 @@ function LoginPage() {
               name="username"
               className="login__input"
               placeholder="Username or Email"
+              autoComplete="username"
+              required
               {...formik.getFieldProps("username")}
             />
             {formik.touched.username && formik.errors.username ? (
@@ -88,6 +87,8 @@ function LoginPage() {
               name="password"
               className="login__input"
               placeholder="Password"
+              autoComplete="current-password"
+              required
               {...formik.getFieldProps("password")}
             />
             {formik.touched.password && formik.errors.password ? (

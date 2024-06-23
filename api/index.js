@@ -17,10 +17,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
 const PORT = process.env.PORT || 3000;
 
-const allowedOrigins = [
-  process.env.FE_LINK_1,
-  process.env.FE_LINK_2,
-];
+const allowedOrigins = [process.env.FE_LINK_1, process.env.FE_LINK_2];
 
 const rateLimit = require("express-rate-limit");
 
@@ -42,6 +39,7 @@ app.use(
       }
       return callback(null, true);
     },
+    // origin:"http://localhost:3000"
   })
 );
 app.use(express.json());

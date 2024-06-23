@@ -21,16 +21,27 @@ function RegisterPage() {
         .required("Username or Email is required")
         .matches(/^\S*$/, "Username cannot contain spaces")
         .max(25, "Username or Email must be less than 25 characters")
-        .test("no-special-characters", "Username cannot contain special characters", (value) => /^[a-zA-Z0-9]*$/.test(value)),
+        .test(
+          "no-special-characters",
+          "Username cannot contain special characters",
+          (value) => /^[a-zA-Z0-9]*$/.test(value)
+        ),
       password: Yup.string()
         .required("Password is required")
         .min(8, "Password must be at least 8 characters")
         .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-        .matches(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character : !@#$%^&*(),.?\":{}|<>")
-        .test("no-sql-injection", "Password cannot contain SQL injection characters", (value) => {
-          const sqlRegex = /[;'"`]/; // Add more SQL injection characters if needed
-          return !sqlRegex.test(value);
-        }),
+        .matches(
+          /[!@#$%^&*(),.?":{}|<>]/,
+          'Password must contain at least one special character : !@#$%^&*(),.?":{}|<>'
+        )
+        .test(
+          "no-sql-injection",
+          "Password cannot contain SQL injection characters",
+          (value) => {
+            const sqlRegex = /[;'"`]/; // Add more SQL injection characters if needed
+            return !sqlRegex.test(value);
+          }
+        ),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Confirm Password is required"),
@@ -64,17 +75,25 @@ function RegisterPage() {
     <div className="screen">
       <div className="screen__content">
         <form className="sign-up" onSubmit={formik.handleSubmit}>
-          <h2 className="form-title" style={{ color: "#F6833B", fontSize: "3rem" }}>
+          <h2
+            className="form-title"
+            style={{ color: "#F6833B", fontSize: "3rem" }}
+          >
             Register
           </h2>
           <div className="sign-up__field">
-            <i className="sign-up__icon fas fa-user" style={{ color: "#F6833B" }}></i>
+            <i
+              className="sign-up__icon fas fa-user"
+              style={{ color: "#F6833B" }}
+            ></i>
             <input
               type="text"
               id="username"
               name="username"
               className="sign-up__input"
               placeholder="Username or Email"
+              autoComplete="username"
+              required
               {...formik.getFieldProps("username")}
             />
             {formik.touched.username && formik.errors.username ? (
@@ -82,13 +101,18 @@ function RegisterPage() {
             ) : null}
           </div>
           <div className="sign-up__field">
-            <i className="sign-up__icon fas fa-lock" style={{ color: "#F6833B" }}></i>
+            <i
+              className="sign-up__icon fas fa-lock"
+              style={{ color: "#F6833B" }}
+            ></i>
             <input
               type="password"
               id="password"
               name="password"
               className="sign-up__input"
               placeholder="Password"
+              autoComplete="new-password"
+              required
               {...formik.getFieldProps("password")}
             />
             {formik.touched.password && formik.errors.password ? (
@@ -96,20 +120,31 @@ function RegisterPage() {
             ) : null}
           </div>
           <div className="sign-up__field">
-            <i className="sign-up__icon fas fa-lock" style={{ color: "#F6833B" }}></i>
+            <i
+              className="sign-up__icon fas fa-lock"
+              style={{ color: "#F6833B" }}
+            ></i>
             <input
               type="password"
               id="confirmPassword"
               name="confirmPassword"
               className="sign-up__input"
               placeholder="Confirm Password"
+              autoComplete="new-password"
+              required
               {...formik.getFieldProps("confirmPassword")}
             />
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <div className="error-message">{formik.errors.confirmPassword}</div>
+              <div className="error-message">
+                {formik.errors.confirmPassword}
+              </div>
             ) : null}
           </div>
-          <button type="submit" className="button sign-up__submit" disabled={formik.isSubmitting}>
+          <button
+            type="submit"
+            className="button sign-up__submit"
+            disabled={formik.isSubmitting}
+          >
             {loading ? (
               "Registering..."
             ) : (

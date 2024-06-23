@@ -56,18 +56,26 @@ const NewsletterSignUp = () => {
       <form onSubmit={handleSubmit} className="form newsLetter-signUp-form">
         <input
           type="text"
+          id="name"
+          name="name"
           className="name-input"
           value={name}
           onChange={(event) => setName(event.target.value)}
           placeholder="Name"
+          autoComplete="name"
+          required
         />
 
         <input
           type="email"
+          id="email"
+          name="email"
           className="email-input"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Email"
+          autoComplete="email"
+          required
         />
 
         <button type="submit">Subscribe</button>
