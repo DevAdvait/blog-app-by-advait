@@ -193,12 +193,24 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 app.get("/post", async (req, res) => {
-  res.json(
-    await Post.find()
+  const page = parseInt(req.query.page) || 1; // Get the page number from the query string
+  const limit = 10; // Number of posts per page
+  const skip = (page - 1) * limit;
+
+  try {
+    const posts = await Post.find()
       .populate("author", ["username"])
       .sort({ createdAt: -1 })
-      .limit(20)
-  );
+      .skip(skip)
+      .limit(limit);
+    const totalPosts = await Post.countDocuments();
+    const hasMore = page * limit < totalPosts;
+
+    res.json({ posts, hasMore });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 app.get("/post/:id", async (req, res) => {

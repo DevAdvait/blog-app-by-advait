@@ -7,35 +7,45 @@ import LoadingPosts from "../components/LoadingPosts";
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("/post")
-      .then((response) => {
-        setPosts(response.data);
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`/post?page=${page}`);
+        setPosts(prevPosts => [...prevPosts, ...response.data.posts]);
+        setHasMore(response.data.hasMore);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching posts:", error);
         setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    fetchPosts();
+  }, [page]);
+
+  const loadMorePosts = () => {
+    if (hasMore) {
+      setPage(prevPage => prevPage + 1);
+    }
+  };
 
   return (
     <div>
       <div className="hp-posts-div" style={{ minHeight: "85vh" }}>
-        {loading ? ( // Conditionally render loading text or posts
-          // <div className="pp-loading">
-          //   {"Loading...".split("").map((char, index) => (
-          //     <span key={index}>{char}</span>
-          //   ))}
-          // </div>
+        {loading && page === 1 ? (
           <LoadingPosts />
         ) : (
           posts.length > 0 &&
-          posts.map((post) => <Post key={post._id} {...post} />)
+          posts.map(post => <Post key={post._id} {...post} />)
         )}
       </div>
+      {hasMore && !loading && (
+        <button onClick={loadMorePosts}>Load More</button>
+      )}
       <div>
         <NewsletterSignUp />
       </div>

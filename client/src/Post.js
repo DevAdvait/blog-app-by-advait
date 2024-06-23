@@ -34,6 +34,7 @@ export default function Post({
             src={axios.defaults.baseURL + "/" + cover}
             alt={`${title}`}
             className="img-fluid"
+            loading="lazy"
           />
         </Link>
       </div>
