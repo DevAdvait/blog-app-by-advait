@@ -15,7 +15,7 @@ const Newsletter = require("./models/Newsletter");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   process.env.FE_LINK_1,
