@@ -33,7 +33,7 @@ export default function IndexPage() {
           posts.length > 0 &&
           posts.map((post) => <Post key={post._id} {...post} />)
         )}
-      </div>{" "}
+      </div>
       <div>
         <NewsletterSignUp />
       </div>
