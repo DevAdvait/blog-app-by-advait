@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Post from "../Post";
-import NewsletterSignUp from "../NewsletterSignUp";
+import Post from "../components/Post";
+import NewsletterSignUp from "../components/NewsletterSignUp";
 import axios from "axios";
 import LoadingPosts from "../components/LoadingPosts";
 

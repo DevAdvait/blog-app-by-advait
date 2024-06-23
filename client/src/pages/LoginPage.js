@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../components/UserContext";
 import axios from "axios";
 import "./loginPage.css";
 

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import Logo from "./Capture-removebg-preview.png";
+import Logo from "../assets/Capture-removebg-preview.png";
 import axios from "axios";
 
 export default function Header() {

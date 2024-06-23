@@ -391,7 +391,7 @@ footer {
   color: white;
   font-size: 1rem;
   font-weight: 800;
-  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-image: url("./assets/abstract-art-7410896_1920.jpg");
   background-size: cover;
 }
 @media screen and (max-width: 320px) {
@@ -427,7 +427,7 @@ footer {
   outline: solid var(--blue);
   font-weight: 600;
   letter-spacing: 0.3rem;
-  background-image: url("./water-2079907_1920.jpg");
+  background-image: url("./assets/water-2079907_1920.jpg");
   background-size: cover;
 }
 .name-input:hover::placeholder,
@@ -451,7 +451,7 @@ footer {
   min-width: 120px;
   min-height: 30px;
   text-align: center;
-  background-image: url("./fluid-7579494.jpg");
+  background-image: url("./assets/fluid-7579494.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.8;
@@ -462,7 +462,7 @@ footer {
   background-color: var(--blue);
   color: white;
   box-shadow: 0 0px 8px var(--blue);
-  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-image: url("./assets/abstract-art-7410896_1920.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;
@@ -529,7 +529,7 @@ footer {
   background-color: var(--blue);
   color: white;
   box-shadow: 0 0px 8px var(--blue);
-  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-image: url("./assets/abstract-art-7410896_1920.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;
@@ -561,7 +561,7 @@ footer {
   background-color: var(--blue);
   color: white;
   box-shadow: 0 0px 8px var(--blue);
-  background-image: url("./abstract-art-7410896_1920.jpg");
+  background-image: url("./assets/abstract-art-7410896_1920.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../components/UserContext";
 import { Link } from "react-router-dom";
-import NewsletterSignUp from "../NewsletterSignUp";
+import NewsletterSignUp from "../components/NewsletterSignUp";
 import axios from "axios";
 
 export default function PostPage() {
