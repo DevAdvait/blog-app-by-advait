@@ -60,7 +60,7 @@ export default function PostPage() {
         )}
         <div className="image">
           <img
-            src={`http://localhost:5000/${postInfo.cover}`}
+            src={`${process.env.REACT_APP_BEP_LINK}/${postInfo.cover}`}
             alt={`${postInfo.title}`}
           />
         </div>
