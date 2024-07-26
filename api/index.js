@@ -12,6 +12,8 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 const fs = require("fs");
 require("dotenv").config({ path: "../.env" });
 const Newsletter = require("./models/Newsletter");
+const sharp = require("sharp");
+const cron = require("node-cron");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
@@ -76,7 +78,7 @@ app.post("/newsletter", async (req, res) => {
 app.post("/register", limiter, async (req, res) => {
   const { username, password } = req.body;
   // Check for SQL injection characters in username
-  if (/;|'|`/.test(username)) {
+  if (/;|'|/.test(username)) {
     return res.status(400).json({ error: "Invalid characters in username" });
   }
 
@@ -141,6 +143,7 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
   const newPath = path + "." + ext;
+
   fs.renameSync(path, newPath);
 
   const { token } = req.cookies;
@@ -217,6 +220,30 @@ app.get("/post/:id", async (req, res) => {
   const postDoc = await Post.findById(id).populate("author", ["username"]);
   res.json(postDoc);
 });
+
+// Function to convert images to webp format
+const convertImagesToWebp = async () => {
+  try {
+    const posts = await Post.find();
+
+    for (let post of posts) {
+      const coverPath = post.cover;
+      if (coverPath && !coverPath.endsWith(".webp")) {
+        const webpPath = coverPath.replace(/\.[^/.]+$/, ".webp");
+        await sharp(coverPath).toFormat("webp").toFile(webpPath);
+        post.cover = webpPath;
+        await post.save();
+        fs.unlinkSync(coverPath); // Remove the original image
+      }
+    }
+    console.log("Images converted to WebP format");
+  } catch (error) {
+    console.error("Error converting images to WebP:", error);
+  }
+};
+
+// Schedule the task to run every hour
+cron.schedule("0 * * * *", convertImagesToWebp);
 
 app.listen(PORT, () => {
   console.log(`App running on Port: ${PORT}`);
