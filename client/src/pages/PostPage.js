@@ -1,10 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { UserContext } from "../components/UserContext";
 import { Link } from "react-router-dom";
 import NewsletterSignUp from "../components/NewsletterSignUp";
 import axios from "axios";
+import LazyLoad from "react-lazyload";
+import { Blurhash } from "react-blurhash";
+
+
 
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
@@ -12,10 +16,28 @@ export default function PostPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/post/${id}`).then((response) => {
-      setPostInfo(response.data);
-    });
+    const cachedPost = localStorage.getItem(`post-${id}`);
+    if (cachedPost) {
+      setPostInfo(JSON.parse(cachedPost));
+    } else {
+      fetchPostData(id);
+    }
   }, [id]);
+
+  const fetchPostData = async (postId) => {
+    try {
+      const response = await axios.get(`/post/${postId}`);
+      setPostInfo(response.data);
+      localStorage.setItem(`post-${postId}`, JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Failed to fetch post data:", error);
+    }
+  };
+
+  const handleClearCache = () => {
+    localStorage.removeItem(`post-${id}`);
+    fetchPostData(id);
+  };
 
   if (!postInfo)
     return (
@@ -59,16 +81,31 @@ export default function PostPage() {
           </div>
         )}
         <div className="image">
-          <img
-            src={`${process.env.REACT_APP_BEP_LINK}/${postInfo.cover}`}
-            alt={`${postInfo.title}`}
-          />
+          <LazyLoad
+            height={200}
+            offset={100}
+            placeholder={
+              <Blurhash
+                hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+                width="100%"
+                height="100%"
+              />
+            }
+          >
+            <img
+              src={`${process.env.REACT_APP_BEP_LINK}/${postInfo.cover}`}
+              alt={`${postInfo.title}`}
+              style={{ display: "block", width: "100%", height: "auto" }}
+            />
+          </LazyLoad>
         </div>
         <div
           className="content"
           dangerouslySetInnerHTML={{ __html: postInfo.content }}
         />
       </div>
+
+      <button onClick={handleClearCache}>Clear Cache</button>
 
       <NewsletterSignUp />
     </div>
