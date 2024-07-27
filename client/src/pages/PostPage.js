@@ -86,7 +86,7 @@ export default function PostPage() {
             }
           >
             <img
-              src={`${process.env.REACT_APP_BEP_LINK}/uploads/${postInfo.cover}`}
+              src={`${process.env.REACT_APP_BEP_LINK}/${postInfo.cover}`}
               alt={`${postInfo.title}`}
               style={{ display: "block", width: "100%", height: "auto" }}
             />
