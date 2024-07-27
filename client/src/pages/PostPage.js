@@ -8,8 +8,6 @@ import axios from "axios";
 import LazyLoad from "react-lazyload";
 import { Blurhash } from "react-blurhash";
 
-
-
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
@@ -32,11 +30,6 @@ export default function PostPage() {
     } catch (error) {
       console.error("Failed to fetch post data:", error);
     }
-  };
-
-  const handleClearCache = () => {
-    localStorage.removeItem(`post-${id}`);
-    fetchPostData(id);
   };
 
   if (!postInfo)
@@ -104,8 +97,6 @@ export default function PostPage() {
           dangerouslySetInnerHTML={{ __html: postInfo.content }}
         />
       </div>
-
-      <button onClick={handleClearCache}>Clear Cache</button>
 
       <NewsletterSignUp />
     </div>
