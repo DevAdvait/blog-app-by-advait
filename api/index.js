@@ -17,7 +17,7 @@ const cron = require("node-cron");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [process.env.FE_LINK_1, process.env.FE_LINK_2];
 
