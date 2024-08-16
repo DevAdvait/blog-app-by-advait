@@ -648,8 +648,6 @@ form .create-post-form::placeholder {
   border-radius: 5px;
 }
 
-
-
 .hp-postSum-inLine-btn {
   background-color: transparent;
   border: none;
@@ -660,10 +658,17 @@ form .create-post-form::placeholder {
   color: #007bff;
 }
 
-
-
 .post-image {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.logo-div {
+  width: 180px;
+  align-items: center;
+  margin: 0;
+}
+.hp-posts-div {
+  min-height: 85vh;
 }

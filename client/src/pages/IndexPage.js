@@ -15,7 +15,7 @@ export default function IndexPage() {
       setLoading(true);
       try {
         const response = await axios.get(`/post?page=${page}`);
-        setPosts(prevPosts => [...prevPosts, ...response.data.posts]);
+        setPosts((prevPosts) => [...prevPosts, ...response.data.posts]);
         setHasMore(response.data.hasMore);
         setLoading(false);
       } catch (error) {
@@ -29,18 +29,18 @@ export default function IndexPage() {
 
   const loadMorePosts = () => {
     if (hasMore) {
-      setPage(prevPage => prevPage + 1);
+      setPage((prevPage) => prevPage + 1);
     }
   };
 
   return (
     <div>
-      <div className="hp-posts-div" style={{ minHeight: "85vh" }}>
+      <div className="hp-posts-div">
         {loading && page === 1 ? (
           <LoadingPosts />
         ) : (
           posts.length > 0 &&
-          posts.map(post => <Post key={post._id} {...post} />)
+          posts.map((post) => <Post key={post._id} {...post} />)
         )}
       </div>
       {hasMore && !loading && (

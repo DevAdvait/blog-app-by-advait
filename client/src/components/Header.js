@@ -56,8 +56,8 @@ export default function Header() {
   return (
     <header>
       <Link to="/" className="logo">
-        <div style={{ width: "180px", margin: "0", alignItems: "center" }}>
-          <img src={Logo} alt="BADVAIT Logo" className="img-fluid" />
+        <div className="logo-div">
+          <img src={Logo} alt="Blog App by Advait Tumbre Logo" className="img-fluid" />
         </div>
       </Link>
 
