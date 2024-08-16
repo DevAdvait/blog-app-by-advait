@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Post from "../components/Post";
 import NewsletterSignUp from "../components/NewsletterSignUp";
 import axios from "axios";
@@ -17,9 +17,9 @@ export default function IndexPage() {
         const response = await axios.get(`/post?page=${page}`);
         setPosts((prevPosts) => [...prevPosts, ...response.data.posts]);
         setHasMore(response.data.hasMore);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -28,7 +28,7 @@ export default function IndexPage() {
   }, [page]);
 
   const loadMorePosts = () => {
-    if (hasMore) {
+    if (hasMore && !loading) {
       setPage((prevPage) => prevPage + 1);
     }
   };
@@ -36,11 +36,17 @@ export default function IndexPage() {
   return (
     <div>
       <div className="hp-posts-div">
-        {loading && page === 1 ? (
-          <LoadingPosts />
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <Suspense
+              key={post._id}
+              fallback={<LoadingPosts />} // Fallback while loading posts
+            >
+              <Post {...post} />
+            </Suspense>
+          ))
         ) : (
-          posts.length > 0 &&
-          posts.map((post) => <Post key={post._id} {...post} />)
+          <LoadingPosts /> // Initial loading state
         )}
       </div>
       {hasMore && !loading && (

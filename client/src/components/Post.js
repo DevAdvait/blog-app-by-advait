@@ -1,23 +1,17 @@
 import axios from "axios";
 import { formatISO9075 } from "date-fns";
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, memo } from "react";
 import { Link } from "react-router-dom";
 
 const PostImage = lazy(() => import("./PostImage"));
 
-export default function Post({
-  _id,
-  title,
-  summary,
-  cover,
-  createdAt,
-  author,
-}) {
+function Post({ _id, title, summary, cover, createdAt, author }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSummary = () => {
     setIsExpanded(!isExpanded);
   };
+
   const getShortSummary = () => {
     const words = summary.split(" ");
     if (words.length <= 10) {
@@ -77,3 +71,5 @@ export default function Post({
     </div>
   );
 }
+
+export default memo(Post);
