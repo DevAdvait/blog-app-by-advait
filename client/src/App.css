@@ -662,6 +662,8 @@ form .create-post-form::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 250px;
+  margin: 0 auto;
 }
 
 .logo-div {
@@ -671,4 +673,33 @@ form .create-post-form::placeholder {
 }
 .hp-posts-div {
   min-height: 85vh;
+}
+
+.loading-image-shadow {
+  width: 250px;
+  height: 150px;
+  margin-right: 20px; /* Adjust margin for spacing */
+  background-color: #100952;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.3rem rgba(145, 230, 221, 0.3);
+  animation: pulse-box-shadow 1.5s infinite ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+.loading-image-shadow p {
+  color: var(--orange);
+  text-decoration:wavy;
+}
+@keyframes pulse-box-shadow {
+  0% {
+    box-shadow: 0 0 0.1rem rgba(145, 230, 221, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0.3rem rgba(145, 230, 221, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0.1rem rgba(145, 230, 221, 0.1);
+  }
 }

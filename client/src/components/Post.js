@@ -28,12 +28,15 @@ export default function Post({
 
   return (
     <div className="post">
-      <div
-        className="post-image"
-        style={{ maxWidth: "250px", margin: "0 auto" }}
-      >
+      <div className="post-image">
         <Link to={`/post/${_id}`}>
-          <Suspense fallback={<div>Loading image...</div>}>
+          <Suspense
+            fallback={
+              <div className="loading-image-shadow">
+                <p>Loading image...</p>
+              </div>
+            }
+          >
             <PostImage src={axios.defaults.baseURL + "/" + cover} alt={title} />
           </Suspense>
         </Link>
