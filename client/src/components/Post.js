@@ -1,7 +1,10 @@
 import axios from "axios";
 import { formatISO9075 } from "date-fns";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+
+const PostImage = lazy(() => import("./PostImage"));
+
 export default function Post({
   _id,
   title,
@@ -30,12 +33,9 @@ export default function Post({
         style={{ maxWidth: "250px", margin: "0 auto" }}
       >
         <Link to={`/post/${_id}`}>
-          <img
-            src={axios.defaults.baseURL + "/" + cover}
-            alt={`${title}`}
-            className="img-fluid"
-            loading="lazy"
-          />
+          <Suspense fallback={<div>Loading image...</div>}>
+            <PostImage src={axios.defaults.baseURL + "/" + cover} alt={title} />
+          </Suspense>
         </Link>
       </div>
       <div className="post-content">
